@@ -21,7 +21,7 @@ import { projects } from '../data/projects';
   <main id="work">
     {projects.map((p, i) => (
       <section class="project fade" id={`p${p.n}`} aria-labelledby={`t${p.n}`}>
-        <span class={`marker${i === 0 ? ' active' : ''}`} aria-hidden="true">{p.n}</span>
+        <span class={`marker${i === 0 ? ' active' : ''}`} data-marker aria-hidden="true">{p.n}</span>
         <div class="wrap">
           <figure>
             <img src={p.image} alt={p.alt} width="800" height="500" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
@@ -58,6 +58,18 @@ import { projects } from '../data/projects';
   <script is:inline>
     (function () {
       var els = document.querySelectorAll('.fade');
+      var markers = document.querySelectorAll('.marker');
+      if ('IntersectionObserver' in window) {
+        var act = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              markers.forEach(function (m) { m.classList.remove('active'); });
+              var m = en.target.querySelector('.marker'); if (m) m.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        document.querySelectorAll('.project').forEach(function (e) { act.observe(e); });
+      }
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce || !('IntersectionObserver' in window)) {
         els.forEach(function (e) { e.classList.add('in'); });

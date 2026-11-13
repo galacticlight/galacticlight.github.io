@@ -21,8 +21,8 @@ export const projects: Project[] = [
       'Shipping a native desktop AI product, not a chat wrapper. An optional LLM connects through an OpenAI-compatible “Harbor” (Grok preset), keys stay in OS secure storage, and CI is tested.',
     tech: ['TypeScript', 'Electron', 'Vite', 'Three.js', 'Vitest', 'ONNX TTS'],
     links: [{ href: 'https://github.com/galacticlight/ordis', text: 'Source on GitHub' }],
-    image: '/img/ordis.svg',
-    alt: 'Line drawing of an isometric cube with a small gold diamond on one face, standing in for the Ordis companion.',
+    image: '/img/ordis.webp',
+    alt: 'The Ordis companion on a dark background: a translucent gold-framed cube holding two glass-like spheres inside orbiting gold rings.',
   },
   {
     n: '02',
