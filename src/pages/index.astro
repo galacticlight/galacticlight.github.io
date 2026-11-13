@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects } from '../data/projects';
+---
+<Base
+  title="Galacticlight"
+  description="Galacticlight is an engineer building local-first tools, AI companions, and things made by hand."
+>
+  <a class="skip" href="#work">Skip to projects</a>
+  <header class="hero">
+    <div class="wrap">
+      <h1>Galacticlight</h1>
+      <p class="lede">Engineer building local-first tools, AI companions, and things made by hand.</p>
+      <nav aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="https://github.com/galacticlight">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="work">
+    {projects.map((p, i) => (
+      <section class="project fade" id={`p${p.n}`} aria-labelledby={`t${p.n}`}>
+        <span class={`marker${i === 0 ? ' active' : ''}`} aria-hidden="true">{p.n}</span>
+        <div class="wrap">
+          <figure>
+            <img src={p.image} alt={p.alt} width="800" height="500" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+          </figure>
+          <div class="body">
+            <hr class="rule" />
+            <h2 id={`t${p.n}`}>
+              <span class="visually-hidden">{p.n}. </span>{p.title}
+            </h2>
+            {p.label && <p class="label">{p.label}</p>}
+            <p class="pitch">{p.pitch}</p>
+            {p.proves && <p class="proves"><span>What it proves</span>{p.proves}</p>}
+            <ul class="tech" aria-label="Technologies">
+              {p.tech.map((t) => <li>{t}</li>)}
+            </ul>
+            {p.note && <p class="note"><em>{p.note}</em></p>}
+            {p.links.length > 0 && (
+              <p class="links">
+                {p.links.map((l) => <a href={l.href}>{l.text}</a>)}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+    ))}
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Galacticlight · <a href="https://github.com/galacticlight">GitHub</a></p>
+    </div>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      var els = document.querySelectorAll('.fade');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+</Base>
