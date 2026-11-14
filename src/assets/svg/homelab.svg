@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" stroke="#9a9286" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<rect class="draw" pathLength="1" style="--d:0s" x="320" y="100" width="160" height="70" rx="3"/>
+<path class="draw" pathLength="1" style="--d:.5s" d="M340 125 H420 M340 145 H400" opacity=".6"/>
+<rect class="draw" pathLength="1" style="--d:.6s" x="110" y="300" width="150" height="90" rx="3" stroke="#ece6da"/>
+<path class="draw" pathLength="1" style="--d:1s" d="M125 318 h40 v30 h-40 Z M175 318 h20 v14 h-20 Z M130 372 H240" opacity=".6"/>
+<rect class="draw" pathLength="1" style="--d:.9s" x="325" y="300" width="150" height="90" rx="3" stroke="#ece6da"/>
+<path class="draw" pathLength="1" style="--d:1.3s" d="M340 318 h40 v30 h-40 Z M390 318 h20 v14 h-20 Z M345 372 H455" opacity=".6"/>
+<rect class="draw" pathLength="1" style="--d:1.2s" x="540" y="300" width="150" height="90" rx="3" stroke="#ece6da"/>
+<path class="draw" pathLength="1" style="--d:1.6s" d="M555 318 h120 v8 h-120 Z M555 336 h120 v8 h-120 Z M555 354 h120 v8 h-120 Z" opacity=".6"/>
+<path class="draw" pathLength="1" style="--d:2s" d="M400 170 V235 M185 235 H615 M185 235 V300 M400 235 V300 M615 235 V300" opacity=".8"/>
+<path class="draw" pathLength="1" style="--d:2.4s" d="M110 430 H690" opacity=".35"/>
+<circle class="fadein" style="--d:2.6s" cx="400" cy="235" r="3" stroke="#ece6da"/>
+<circle class="dot" cx="0" cy="0" r="3.5" fill="#b8975a" stroke="none"/>
+</svg>

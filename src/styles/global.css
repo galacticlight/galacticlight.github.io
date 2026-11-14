@@ -42,7 +42,8 @@ h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: 0.02em; li
 }
 .marker.active { color: var(--gold); }
 figure { margin: 0 0 3.5rem; }
-figure img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; border: 1px solid rgba(236, 230, 218, 0.08); }
+figure.frame { overflow: hidden; border: 1px solid rgba(236, 230, 218, 0.08); aspect-ratio: 8 / 5; }
+figure.frame img, figure.frame .art svg { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; }
 .rule { width: 3rem; border: 0; border-top: 1px solid var(--gold); margin: 0 0 1.75rem; }
 .project h2 { font-size: clamp(2rem, 1.5rem + 2.5vw, 3.25rem); }
 .label {
@@ -59,7 +60,7 @@ footer { padding: 12vh 0 8vh; color: var(--muted); font-size: 0.85em; }
 footer .wrap { padding-left: 4.5rem; }
 footer p { margin: 0; }
 
-/* The only motion on the site: a slow fade-in. */
+/* Motion: a slow section fade-in, plus one quiet ambient motion per project image. */
 .js .fade { opacity: 0; transition: opacity 900ms ease; }
 .js .fade.in { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
@@ -70,3 +71,54 @@ footer p { margin: 0; }
   .project .wrap, .hero .wrap, footer .wrap { padding-left: 3.25rem; padding-right: 1.25rem; }
   .marker { left: 1rem; }
 }
+
+/* Ambient motion per project. Starts when the section enters view (.in), off under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Raster images (Ordis, SKYHUD): a very slow float with a faint breathe. */
+  .js .project.in img.float { animation: float 9s ease-in-out infinite alternate; will-change: transform; }
+  @keyframes float {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-3px) scale(1.012); }
+  }
+
+  /* SVG line drawing (Joinery, Ledgerlight, drone, Home Lab). */
+  .js .project:not(.in) .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .js .project:not(.in) .fadein { opacity: 0; }
+  .js .project.in .draw {
+    stroke-dasharray: 1; stroke-dashoffset: 1;
+    animation: draw 2.5s cubic-bezier(0.45, 0, 0.25, 1) var(--d, 0s) forwards;
+  }
+  .js .project.in .fadein { opacity: 0; animation: appear 2s ease var(--d, 0s) forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes appear { to { opacity: 1; } }
+
+  /* Ledgerlight: one ledger line breathes faint. */
+  .js .project.in .draw.pulse {
+    animation: draw 2.5s cubic-bezier(0.45, 0, 0.25, 1) var(--d) forwards, pulse 10s ease-in-out 4.5s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 0.2; } }
+
+  /* Drone: drifts a few pixels, very slowly. */
+  .js .project.in .drift { animation: drift 12s ease-in-out 3s infinite alternate; }
+  @keyframes drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(18px, -6px); }
+  }
+
+  /* Home Lab: one tiny gold dot travels the connection lines. */
+  .js .project.in .dot {
+    offset-path: path('M400 170 V235 H185 V300');
+    offset-rotate: 0deg;
+    opacity: 0;
+    animation: travel 12s ease-in-out 4s infinite alternate;
+  }
+  @keyframes travel {
+    0% { offset-distance: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { offset-distance: 100%; opacity: 0; }
+  }
+}
+/* The traveling dot is hidden unless motion is allowed. */
+.dot { display: none; }
+@media (prefers-reduced-motion: no-preference) { .js .project.in .dot { display: inline; } }

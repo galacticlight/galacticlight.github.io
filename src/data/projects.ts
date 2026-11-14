@@ -7,7 +7,8 @@ export interface Project {
   tech: string[];
   note?: string;
   links: { href: string; text: string }[];
-  image: string;
+  image?: string;
+  svg?: 'joinery' | 'ledgerlight' | 'drone' | 'homelab';
   alt: string;
 }
 
@@ -26,6 +27,21 @@ export const projects: Project[] = [
   },
   {
     n: '02',
+    title: 'SKYHUD',
+    pitch:
+      'A night-sky dashboard for stargazers that answers one question: is tonight worth going out, and what is up there? An observing score, a live sky dome, the Moon, planets, ISS passes and space weather, all computed in your browser.',
+    proves:
+      'Data-heavy product thinking with restraint. The astronomy runs on-device and is checked against JPL Horizons, with no backend, no accounts, no analytics and no third-party scripts.',
+    tech: ['JavaScript', 'Canvas', 'Astronomy Engine', 'SGP4', 'Service worker', 'GitHub Actions'],
+    links: [
+      { href: 'https://galacticlight.github.io/SKYHUD/', text: 'Open the live demo' },
+      { href: 'https://github.com/galacticlight/SKYHUD', text: 'Source on GitHub' },
+    ],
+    image: '/img/skyhud.webp',
+    alt: 'A circular star chart of the night sky on a dark background, with constellation lines, labelled planets and meteor-shower radiants.',
+  },
+  {
+    n: '03',
     title: 'The Joinery Journey',
     pitch:
       'A public learning notebook for Japanese joinery, begun from zero: roadmap, budget, tools, a joints glossary and a working journal. A data-driven Astro site with hand-drawn SVG charts and automated Pages deploys.',
@@ -35,11 +51,11 @@ export const projects: Project[] = [
       { href: 'https://galacticlight.github.io/japanese-joinery-journey/', text: 'Visit the site' },
       { href: 'https://github.com/galacticlight/japanese-joinery-journey', text: 'Source on GitHub' },
     ],
-    image: '/img/joinery.svg',
+    svg: 'joinery',
     alt: 'Line drawing of a simple interlocking wooden joint above a measuring rule.',
   },
   {
-    n: '03',
+    n: '04',
     title: 'Ledgerlight',
     label: 'Local tool',
     pitch:
@@ -48,11 +64,11 @@ export const projects: Project[] = [
     tech: ['Local database', 'Desktop app'],
     note: 'Runs locally. Private by design.',
     links: [],
-    image: '/img/ledgerlight.svg',
+    svg: 'ledgerlight',
     alt: 'Line drawing of a budgeting app window with a list of rows and a small bar chart, with no real figures.',
   },
   {
-    n: '04',
+    n: '05',
     title: 'drone-enviro-monitor',
     label: 'In Progress',
     pitch:
@@ -60,11 +76,11 @@ export const projects: Project[] = [
     proves: 'Hardware-to-data thinking, from sensor to server to map.',
     tech: ['Raspberry Pi', 'Python', 'FastAPI / Flask', 'SQLite'],
     links: [{ href: 'https://github.com/galacticlight/drone-enviro-monitor', text: 'Plans on GitHub' }],
-    image: '/img/drone.svg',
+    svg: 'drone',
     alt: 'Line drawing of a quadcopter with a small sensor payload above a dotted flight path.',
   },
   {
-    n: '05',
+    n: '06',
     title: 'Home Lab',
     label: 'In Progress',
     pitch:
@@ -72,7 +88,7 @@ export const projects: Project[] = [
     proves: 'Operating real infrastructure end to end, on whatever is already on the shelf.',
     tech: ['Linux', 'Docker', 'Kubernetes', 'Postgres', 'CI/CD', 'Observability'],
     links: [],
-    image: '/img/homelab.svg',
+    svg: 'homelab',
     alt: 'Line drawing of a Debian server connected by lines to three small nodes.',
   },
 ];

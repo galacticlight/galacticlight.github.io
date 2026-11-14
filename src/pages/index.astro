@@ -1,6 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+/// <reference types="astro/client" />
 import { projects } from '../data/projects';
+import joinery from '../assets/svg/joinery.svg?raw';
+import ledgerlight from '../assets/svg/ledgerlight.svg?raw';
+import drone from '../assets/svg/drone.svg?raw';
+import homelab from '../assets/svg/homelab.svg?raw';
+const svgs = { joinery, ledgerlight, drone, homelab };
+const inline = (key: keyof typeof svgs, alt: string) =>
+  svgs[key].replace('<svg ', `<svg role="img" aria-label="${alt.replace(/"/g, '&quot;')}" focusable="false" `);
 ---
 <Base
   title="Galacticlight"
@@ -23,8 +31,11 @@ import { projects } from '../data/projects';
       <section class="project fade" id={`p${p.n}`} aria-labelledby={`t${p.n}`}>
         <span class={`marker${i === 0 ? ' active' : ''}`} data-marker aria-hidden="true">{p.n}</span>
         <div class="wrap">
-          <figure>
-            <img src={p.image} alt={p.alt} width="800" height="500" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+          <figure class={`frame m-${p.n}`}>
+            {p.image && (
+              <img class="float" src={p.image} alt={p.alt} width="1200" height="750" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+            )}
+            {p.svg && <div class="art" set:html={inline(p.svg, p.alt)} />}
           </figure>
           <div class="body">
             <hr class="rule" />
